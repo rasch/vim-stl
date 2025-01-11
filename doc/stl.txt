@@ -1,0 +1,172 @@
+*stl.txt* a statusline with style
+
+                        .-')    .-') _             ~
+                       ( OO ). (  OO) )            ~
+                      (_)---\_)/     '._ ,--.      ~
+                      /    _ | |'--...__)|  |.-')  ~
+                      \  :` `. '--.  .--'|  | OO ) ~
+                       '..`''.)   |  |   |  |`-' | ~
+                      .-._)   \   |  |  (|  '---.' ~
+                      \       /   |  |   |      |  ~
+                       `-----'    `--'   `------'  ~
+
+                         My awesome statusline!
+
+========================================================================
+CONTENTS                                                   *STLContents*
+
+    1. Introduction ......... |STLIntroduction|
+    2. Usage ................ |STLUsage|
+    3. Sections ............. |STLSections|
+    4. License .............. |STLLicense|
+    5. Changelog ............ |STLChangelog|
+    6. Credits .............. |STLCredits|
+
+========================================================================
+INTRODUCTION                                           *STLIntroduction*
+
+This is my personal opinionated |statusline|. It automatically detects a
+few colorschemes, including: catppuccin_mocha, |dracula|, gruvbox, and
+kanagawa. If |termguicolors| is set, then dracula colors are used as the
+default. Any of the mode/accent colors can be configured using the
+|:highlight| command.
+>vim
+    highlight STLNormalMode
+        \ guibg=#decaff guifg=bg gui=bold,italic
+        \ ctermbg=4 ctermfg=0 cterm=bold,italic
+
+    highlight STLInsertMode
+        \ guibg=#c0ffee guifg=bg gui=bold,italic
+        \ ctermbg=2 ctermfg=0 cterm=bold,italic
+<
+========================================================================
+USAGE                                                         *STLUsage*
+
+Some useful options for configuring STL.
+>vim
+    set termguicolors
+    set laststatus=2
+    colorscheme catppuccin_mocha
+
+    " fix terminal rendering (only needed for some terminals)
+    set t_RV=
+<
+STL uses the standard |:highlight| groups |StatusLine|, |StatusLineNC|,
+|StatusLineTerm|, and |StatusLineTermNC| for its theme. The following
+additional highlight groups are provided to allow for configuring the
+accent colors for each mode.
+
+                                                     *STLNormalMode*
+STLNormalMode     Accent color when in normal mode.
+                                                     *STLInsertMode*
+STLInsertMode     Accent color when in insert mode.
+                                                    *STLReplaceMode*
+STLReplaceMode    Accent color when in replace mode.
+                                                    *STLCommandMode*
+STLCommandMode    Accent color when in command mode.
+                                                     *STLVisualMode*
+STLVisualMode     Accent color when in visual mode.
+                                                     *STLSelectMode*
+STLSelectMode     Accent color when in select mode.
+
+Note: Only bold and italic attributes are supported by the STL Mode
+highlights above.
+
+Additionally, the following highlight groups are available.
+
+                                                           *STLInfo*
+STLInfo           Accent color on right hand side info section (when
+                  showing). By default linked to the same highlight
+                  group as the mode.
+                                                          *STLError*
+STLError          Accent color on right hand side error section (when
+                  showing). By default linked to the Error highlight
+                  group.
+
+========================================================================
+SECTIONS                                                   *STLSections*
+
+1. The first section (going from left-to-right) is the mode indicator.
+   Mode will be one of normal, insert, replace, command, terminal,
+   visual, v-line, v-block, select, s-line, or s-block. The mode will
+   be followed by an asterisk if 'paste' mode is enabled.
+
+   | normal |
+   | insert* |
+
+2. The next section is the buffer number followed by :HLP for help
+   buffers or :PRV for preview buffers. Highlighted using the colors
+   from the mode section inverted.
+
+   | 1 |
+   | 2:HLP |
+   | 4:PRV |
+
+3. This section is the filepath and the git branch if the file is in a
+   git repository. Highlighted using the StatusLine group.
+
+   | index.html |
+   | main | index.html |
+
+4. Starting here the sections are right aligned. The filetype is
+   displayed if the window is at least 72 characters wide. Highlighted
+   using the StatusLine group.
+
+   | vim |
+   | help |
+   | typescript |
+
+5. The percentage through the buffer linewise for the cursor position.
+   Highlighted using the colors from the mode section inverted.
+
+   |  6% |
+   | 42% |
+   | 100% |
+
+6. Cursor position and total number of lines (line/lines:column).
+   Highlighted using the StatusLine group.
+
+   |  42/73:13 |
+   | 667/999:81 |
+
+7. Information section. Only displayed if any of the information is not
+   an empty string. Highlighted using the STLInfo group.
+
+   - plus (+) the buffer has unsaved changes
+   - minus (-) the buffer is not modifiable
+   - equals (=) the buffer is readonly
+   - hash (#) the buffer contains an encrypted file
+   - &spelllang only if spell is set
+   - &encoding only if not utf-8
+   - &fileformat only if not unix
+
+   | + |
+   | -= |
+   | # |
+   | + en_us |
+
+8. Shows the total number of errors + warnings in the location list.
+   Only displayed if the total is greater than zero. Highlighted using
+   the STLError group.
+
+   | 1 |
+   | 42 |
+
+========================================================================
+LICENSE                                                     *STLLicense*
+
+Same terms as Vim itself (see |license|)
+
+========================================================================
+CHANGELOG                                                 *STLChangelog*
+
+v0.1.0
+  * Initial release.
+
+========================================================================
+CREDITS                                                     *STLCredits*
+
+Copyright (c) 2017-2025 Rand Schneck <i@rasch.co>
+
+========================================================================
+ vim:ft=help:tw=72:ts=4:et:
